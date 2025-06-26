@@ -11,20 +11,21 @@
         <div class="nav-bar"></div>
         <div class="cart">
             Cart:
-            <div v-for="(item, index) in cart" :key="index">
-                Product ID {{ item }}
+            <div v-for="(count, id) in cart" :key="id">
+                Product ID {{ id }}: {{ count }}
             </div>
         </div>
 
-        <product-display 
-            :premium="premium" 
-            @add-to-cart="updateCart" 
-            @remove-from-cart="removeFromCart">
-        </product-display>
+        <product-display
+            :premium="premium"
+            @add-to-cart="updateCart"
+            @remove-from-cart="removeFromCart"
+        />
     </div>
-    
+
     <script src="./components/ProductDisplay.js"></script>
     <script src="./components/ProductDetails.js"></script>
+    <script src="./components/ReviewForm.js"></script>
     <script src="./main.js"></script>
 </body>
 </html>

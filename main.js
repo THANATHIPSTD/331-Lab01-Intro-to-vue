@@ -2,17 +2,23 @@ const { createApp, ref } = Vue;
 
 const app = createApp({
   setup() {
-    const cart = ref([]); // back to array so we can use splice()
+    const cart = ref({}); // Store quantity by product ID
     const premium = ref(false);
 
     const updateCart = (id) => {
-      cart.value.push(id);
+      if (cart.value[id]) {
+        cart.value[id]++;
+      } else {
+        cart.value[id] = 1;
+      }
     };
 
     const removeFromCart = (id) => {
-      const index = cart.value.indexOf(id);
-      if (index !== -1) {
-        cart.value.splice(index, 1);
+      if (cart.value[id]) {
+        cart.value[id]--;
+        if (cart.value[id] === 0) {
+          delete cart.value[id];
+        }
       }
     };
 
@@ -24,6 +30,7 @@ const app = createApp({
     };
   }
 });
+
 
 
 app.component('product-display', productDisplay);
