@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Intro SE331</title>
-  <link rel="stylesheet" href="./assets/styles.css" />
-  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <meta charset="UTF-8" />
+    <title>Intro SE331</title>
+    <link rel="stylesheet" href="./assets/styles.css" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-  <div id="app">
-    <div class="nav-bar"></div>
-    <div class="cart">Cart {{cart}}</div>
-    <product-display :premium = "premium" @add-to-cart="updateCart"></product-display>
-  </div>
-  
-  <script src="./components/ProductDisplay.js"></script>
-  <script src="./components/ProductDetails.js"></script>
-  <script src="./main.js"></script>
+    <div id="app">
+        <div class="nav-bar"></div>
+        <div class="cart">
+            Cart:
+            <div v-for="(count, id) in cart" :key="id">
+                Product ID {{ id }}: {{ count }}
+            </div>
+        </div>
+        <product-display :premium="premium" @add-to-cart="updateCart"></product-display>
+    </div>
+    
+    <script src="./components/ProductDisplay.js"></script>
+    <script src="./components/ProductDetails.js"></script>
+    <script src="./main.js"></script>
 </body>
 </html>
