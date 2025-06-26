@@ -22,7 +22,7 @@
                 <div class="product-info">
                     <div style="display: inline-flex;">
                         <a :href="url">
-                            <h2 v-if="onSale">{{title + " " + "is on sale !!!"}}</h2>
+                            <h2 v-if="onSale">{{onSaleText}}</h2>
                             <h1 v-else>{{title}}</h1>
                         </a>
                         

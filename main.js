@@ -66,6 +66,10 @@ createApp({
         const inventory = computed(() => {
             return variants.value[selectedVariant.value].quantity;
         });
+
+        const onSaleText = computed(() => {
+            return brand.value + ' ' + product.value + ' is on sale!';
+        })
       
         return{
             title,
@@ -82,6 +86,8 @@ createApp({
             toggleInventory,
             updateVariant,
             selectedVariant,
+
+            onSaleText
             
         }
     }
