@@ -1,7 +1,7 @@
 const {  computed } = Vue;
 
 const productDisplay = {
-  template: /*html*/ `
+  template: `
     <div class="product-display">
       <div class="product-container">
         <div class="product-image">
@@ -41,6 +41,12 @@ const productDisplay = {
           >
             Remove
           </button>
+
+          <div>
+            <review-list v-if="reviews.length":reviews="reviews"></review-list>
+            <review-form @review-submitted="addReview"></review-form>
+          </div>
+  
         </div>
       </div>
     </div>
@@ -54,6 +60,7 @@ const productDisplay = {
     const product = ref('Boots');
     const brand = ref('SE 331');
     const inventory = ref(100);
+    const reviews = ref([]);
     const details = ref([
       '50% cotton',
       '30% wool',
@@ -84,7 +91,11 @@ const productDisplay = {
     }
 
     function removeFromCart() {
-        emit('remove-from-cart', variants.value[selectedVariant.value].id);
+      emit('remove-from-cart', variants.value[selectedVariant.value].id);
+    }
+
+    function addReview(review) {
+      reviews.value.push(review);
     }
 
     const shipping = computed(() => (props.premium ? 'Free' : '30'));
@@ -100,7 +111,10 @@ const productDisplay = {
       updateImage,
       updateVariant,
       shipping,
-      removeFromCart
+      removeFromCart,
+      addReview,
+      reviews,
     };
+    
   }
 };
