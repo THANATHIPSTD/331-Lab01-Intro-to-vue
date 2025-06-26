@@ -19,16 +19,44 @@
                     <img :src="image" alt="">
                 </div>
                 <div class="product-info">
-                    <div >
+                    <div style="display: inline-flex;">
                         <a :href="url">
                             <h1>{{product}}</h1>
                         </a>
                         <h2 v-if="onSale" style="color: red;"> On sale !!!!</h2>
+                        
                     </div>
                     
-                    <p v-if="inventory > 10"> In Stock</p>
-                    <p v-else-if="inventory < 10 && inventory > 0">Almost sold out!</p>
-                    <p v-else> Out Stock</p>
+                    <div style="color: blueviolet;">
+                        <p v-if="inventory > 10"> In Stock</p>
+                        <p v-else-if="inventory < 10 && inventory > 0">Almost sold out!</p>
+                        <p v-else> Out Stock</p>
+                    </div>
+                    
+                    <div>
+                        <p>Details:</p>
+                        <ul>
+                        <li><div v-for="detail in details">
+                            {{ detail }}
+                        </div></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <p>Variants:</p>
+                        <div v-for="variant in variants" :key="variant.id" style="display: inline-flex; margin: 5px;">
+                        {{ variant.color }}
+                        </div>
+                    </div>
+
+                    <div>
+                        <p>Sizes:</p>
+                        <div v-for="size in sizes" :key="size" style="display: inline-flex; margin: 5px;">
+                            {{ size }}
+                        </div>
+                    </div>
+
+        
                 </div>
             </div>
         </div>
