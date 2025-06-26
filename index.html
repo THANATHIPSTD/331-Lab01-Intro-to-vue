@@ -11,11 +11,16 @@
         <div class="nav-bar"></div>
         <div class="cart">
             Cart:
-            <div v-for="(count, id) in cart" :key="id">
-                Product ID {{ id }}: {{ count }}
+            <div v-for="(item, index) in cart" :key="index">
+                Product ID {{ item }}
             </div>
         </div>
-        <product-display :premium="premium" @add-to-cart="updateCart"></product-display>
+
+        <product-display 
+            :premium="premium" 
+            @add-to-cart="updateCart" 
+            @remove-from-cart="removeFromCart">
+        </product-display>
     </div>
     
     <script src="./components/ProductDisplay.js"></script>
