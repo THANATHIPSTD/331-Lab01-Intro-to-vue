@@ -15,14 +15,41 @@ createApp({
         const variants = ref([
             {
                 id: 2234,
-                color: 'green',
+                color: 'GREEN',
+                image: './assets/images/socks_green.jpg',
             },
             {
                 id:2235,
-                color: 'blue',
+                color: 'BLUE',
+                image: './assets/images/socks_blue.jpg',
             }
         ])
         const sizes = ref(["S", "M", "L"]);
+        const cart = ref(0);
+
+        //--------------------------//
+
+        const addToCart = () => {
+            cart.value += 1;
+        }
+
+        const updateImage = (variantImage) => {
+            image.value = variantImage;
+        }
+
+        const toggleInventory = () => {
+
+            if(inventory.value <= 0){
+                inventory.value = 50;
+            } 
+            else if(inventory.value > 10){
+                inventory.value = 5;
+            }
+            else {
+                inventory.value = 0;
+            }
+        }
+
         
         return{
             product,
@@ -32,7 +59,11 @@ createApp({
             onSale,
             details,
             variants,
-            sizes
+            sizes,
+            cart,
+            addToCart,
+            updateImage,
+            toggleInventory
         }
     }
 }).mount('#app');

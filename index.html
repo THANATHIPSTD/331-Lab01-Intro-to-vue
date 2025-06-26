@@ -13,10 +13,11 @@
 <body>
     <div id="app">
         <div class="nav-bar"></div>
+        <div class="cart">Cart {{cart}}</div>
         <div class="product-display">
             <div class="product-container">
                 <div class="product-image">
-                    <img :src="image" alt="">
+                    <img :src="image" :class = "{ 'out-of-stock-img': inventory === 0 }" />
                 </div>
                 <div class="product-info">
                     <div style="display: inline-flex;">
@@ -44,8 +45,7 @@
 
                     <div>
                         <p>Variants:</p>
-                        <div v-for="variant in variants" :key="variant.id" style="display: inline-flex; margin: 5px;">
-                        {{ variant.color }}
+                        <div v-for="variant in variants" :key="variant.id" style="display: inline-flex; margin: 5px; font-size: 20px; " @mouseover = "updateImage(variant.image)" class="color-circle" :style="{ backgroundColor: variant.color }">
                         </div>
                     </div>
 
@@ -54,6 +54,11 @@
                         <div v-for="size in sizes" :key="size" style="display: inline-flex; margin: 5px;">
                             {{ size }}
                         </div>
+                    </div>
+
+                    <div style="margin-top: 10px;">
+                        <button class="addcart" @click="addToCart" :disabled="inventory === 0" :class="{disabledButton: inventory === 0}" style="font-size: 1.5em; padding: 16px 32px; margin: 15px"> Add to cart</button>
+                        <button class="toggleInstock" @click="toggleInventory" style="font-size: 1.5em; padding: 16px 32px; margin: 15px ">Toggle Stock</button>
                     </div>
 
         
