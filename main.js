@@ -1,4 +1,4 @@
-const { createApp, ref ,reactive} = Vue;
+const { createApp, ref, reactive, toRefs } = Vue;
 
 const app = createApp({
   setup() {
