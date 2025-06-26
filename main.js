@@ -1,11 +1,10 @@
-const { createApp, ref } = Vue;
+const { createApp, ref , computed} = Vue;
 
 createApp({
     setup(){
         const product = ref('Socks');
-        const image = ref('./assets/images/socks_green.jpg');
+        const brand = ref('SE 331')
         const url = ref ('https://www.camt.cmu.ac.th'); 
-        const inventory = ref(11);
         const onSale = ref(true);
         const details = ref([
             '50% cotton', 
@@ -17,17 +16,20 @@ createApp({
                 id: 2234,
                 color: 'GREEN',
                 image: './assets/images/socks_green.jpg',
+                quantity: 50,
             },
             {
                 id:2235,
                 color: 'BLUE',
                 image: './assets/images/socks_blue.jpg',
+                quantity: 0,
             }
         ])
+        const selectedVariant = ref(0);
         const sizes = ref(["S", "M", "L"]);
         const cart = ref(0);
 
-        //--------------------------//
+        //-------------------------------------------------------//
 
         const addToCart = () => {
             cart.value += 1;
@@ -38,21 +40,35 @@ createApp({
         }
 
         const toggleInventory = () => {
-
-            if(inventory.value <= 0){
-                inventory.value = 50;
+            const variant = variants.value[selectedVariant.value];
+            if (variant.quantity <= 0) {
+                variant.quantity = 50;
             } 
-            else if(inventory.value > 10){
-                inventory.value = 5;
+            else if (variant.quantity > 10) {
+                variant.quantity = 5;
             }
             else {
-                inventory.value = 0;
+                variant.quantity = 0;
             }
         }
 
-        
+        const title = computed(() =>{
+            return brand.value + ' ' + product.value;
+        })
+
+        const updateVariant = (index) => {
+            selectedVariant.value = index;
+        }
+        const image = computed(() => {
+            return variants.value[selectedVariant.value].image;
+        });
+
+        const inventory = computed(() => {
+            return variants.value[selectedVariant.value].quantity;
+        });
+      
         return{
-            product,
+            title,
             image,
             url,
             inventory,
@@ -63,7 +79,10 @@ createApp({
             cart,
             addToCart,
             updateImage,
-            toggleInventory
+            toggleInventory,
+            updateVariant,
+            selectedVariant,
+            
         }
     }
 }).mount('#app');
