@@ -19,9 +19,16 @@
                     <img :src="image" alt="">
                 </div>
                 <div class="product-info">
-                    <a :href="url">
-                        <h1>{{product}}</h1>
-                    </a>
+                    <div >
+                        <a :href="url">
+                            <h1>{{product}}</h1>
+                        </a>
+                        <h2 v-if="onSale" style="color: red;"> On sale !!!!</h2>
+                    </div>
+                    
+                    <p v-if="inventory > 10"> In Stock</p>
+                    <p v-else-if="inventory < 10 && inventory > 0">Almost sold out!</p>
+                    <p v-else> Out Stock</p>
                 </div>
             </div>
         </div>
